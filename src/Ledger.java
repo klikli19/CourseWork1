@@ -31,7 +31,6 @@ public class Ledger {
         }
         System.out.println("Сумма затрат на зарплату за месяц: " + sum + " рублей.");
     }
-
     public static void searchMaxSalary() {
         int maxSalary = -1;
         for (int i = 0; i < employees.length; i++) {
