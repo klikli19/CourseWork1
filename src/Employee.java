@@ -1,19 +1,22 @@
 public class Employee {
     private final String fullName;
     private int department;
-    private int salary;
-    private static int id = 1;
-
-    public Employee(String fullName, int department, int salary) {
+    private double salary;
+    private static int countId = 1;
+    private final int id;
+    public Employee(String fullName, int department, double salary) {
         this.fullName = fullName;
         this.department = department;
         this.salary = salary;
-        id = getId();
+        this.id = countId++;
     }
 
+    public static int getCountId() {
+        return countId;
+    }
 
-    public int getId () {
-        return id++;
+        public int getId() {
+        return id;
     }
 
     public String getFullName() {
@@ -25,20 +28,22 @@ public class Employee {
     }
 
     public int getSalary() {
-        return salary;
+        return (int) salary;
     }
 
     public void setDepartment(int department) {
         this.department = department;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
     @Override
     public String toString() {
         return "ФИО: " + this.fullName + ". Отдел № " + this.department + ". Зарплата: " + this.salary + " рублей. " +
-                "ID сотрудника: " + id++;
+                "ID сотрудника: " +  id;
     }
+
+
 }
