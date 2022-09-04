@@ -35,28 +35,36 @@ public class Ledger {
     }
     public static void searchMaxSalary() {
         int maxSalary = -1;
+        Employee employeeWithMaxSalary = null;
         for (Employee employee : employees) {
             if (employee != null) {
                 if (employee.getSalary() > maxSalary) {
                     maxSalary = employee.getSalary();
+                    employeeWithMaxSalary = employee;
                 }
             }
         }
-        System.out.println("Максимальная зарплата: " + maxSalary + " рублей");
+        if (employeeWithMaxSalary != null) {
+            System.out.println("Сотрудник с мах зп: " + employeeWithMaxSalary.getFullName());
+        }
     }
+
 
     public static void searchMinSalary() {
         int minSalary = employees[0].getSalary();
+        Employee employeeWithMinSalary = employees[0];
         for (Employee employee : employees) {
             if (employee != null) {
                 if (employee.getSalary() < minSalary) {
                     minSalary = employee.getSalary();
+                    employeeWithMinSalary = employee;
                 }
             }
         }
-        System.out.println("Минимальная зарплата: " + minSalary + " рублей");
+        if (employeeWithMinSalary != null) {
+            System.out.println("Сотрудник с мин зп: " + employeeWithMinSalary.getFullName());
+        }
     }
-
     public static void meanSalary() {
         int sum = 0;
         for (Employee element : employees) {
@@ -70,12 +78,13 @@ public class Ledger {
 
     public static void listEmployees () {
         System.out.println("Список сотрудников: ");
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null) {
-                System.out.println(employees[i].getFullName() + ".");
+        for (Employee employee : employees) {
+            if (employee != null) {
+                System.out.println(employee.getFullName() + ".");
             }
         }
     }
+
     public static void salaryIncrease(double percent) {
         for (Employee employee : employees) {
             if (employee != null) {
@@ -85,23 +94,22 @@ public class Ledger {
         }
     }
 
-
     public static void main(String[] args) {
         Ledger book1 = new Ledger(10);
         add(new Employee("Иванов Иван Иванович", 1, 50051));
-        add(new Employee("Сидоров Степан Степанович", 1, 70000));
-        add(new Employee("Попов Иван Дмитриевич", 2, 60000));
+        add(new Employee("Сидоров Степан Степанович", 1, 170000));
+        add(new Employee("Попов Иван Дмитриевич", 1, 60000));
         add(new Employee("Семёнов Семён Семёнович", 2, 63000));
         add(new Employee("Васильев Василий Васильевич", 3, 55000));
         add(new Employee("Петров Пётр Петрович", 3, 65000));
-        add(new Employee("Дмитрием Дмитрий Дмитриевич", 4, 70000));
-        add(new Employee("Львов Лев Львович",4, 80000));
+        add(new Employee("Дмитриев Дмитрий Дмитриевич", 4, 7000));
+        add(new Employee("Львов Лев Львович",5, 100000));
         add(new Employee("Смирнов Николай Николаевич",5, 90000));
+        add(new Employee("Новиков Павел Николаевич", 5, 95001));
 
         monthlyExpenses();
         System.out.println();
         searchMaxSalary();
-        System.out.println();
         searchMinSalary();
         System.out.println();
         meanSalary();
