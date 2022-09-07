@@ -13,6 +13,13 @@ public class Ledger {
         book1.add(new Employee("Новиков Павел Николаевич", 5, 95001));
         System.out.println();
         book1.printAllEmployees();
+        book1.findEmpWithMaxSalaryInDepartment(5);
+        book1.deleteEmployee(5);
+        book1.searchEmployeeByFullName("Смирнов Николай Николаевич");
+        book1.changeEmployeeSalary(9, 140400);
+        book1.searchMaxSalary();
+        book1.printAllEmployeesOfDepartment(1);
+
 
 
 

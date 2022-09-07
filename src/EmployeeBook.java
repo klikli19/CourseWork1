@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class EmployeeBook {
+public class EmployeeBook<employees> {
     private final Employee[] employees;
 
     public EmployeeBook(int size) {
@@ -27,7 +27,7 @@ public class EmployeeBook {
     }
 
     public void monthlyExpenses() {
-        int sum = 0;
+        double sum = 0;
         for (Employee element : employees) {
             if (element != null) {
                 sum += element.getSalary();
@@ -40,11 +40,9 @@ public class EmployeeBook {
         int maxSalary = -1;
         Employee employeeWithMaxSalary = null;
         for (Employee employee : employees) {
-            if (employee != null) {
-                if (employee.getSalary() > maxSalary) {
-                    maxSalary = employee.getSalary();
-                    employeeWithMaxSalary = employee;
-                }
+            if (employee != null && employee.getSalary() > maxSalary) {
+                maxSalary = employee.getSalary();
+                employeeWithMaxSalary = employee;
             }
         }
         if (employeeWithMaxSalary != null) {
@@ -57,11 +55,9 @@ public class EmployeeBook {
         int minSalary = employees[0].getSalary();
         Employee employeeWithMinSalary = employees[0];
         for (Employee employee : employees) {
-            if (employee != null) {
-                if (employee.getSalary() < minSalary) {
+            if (employee != null && employee.getSalary() < minSalary) {
                     minSalary = employee.getSalary();
                     employeeWithMinSalary = employee;
-                }
             }
         }
         if (employeeWithMinSalary != null) {
@@ -70,13 +66,13 @@ public class EmployeeBook {
     }
 
     public void meanSalary() {
-        int sum = 0;
+        double sum = 0;
         for (Employee element : employees) {
             if (element != null) {
                 sum += element.getSalary();
             }
         }
-        float mean = sum / employees.length;
+        double mean = sum / employees.length;
         System.out.println("Средняя зарплата сотрудников: " + mean + " рублей.");
     }
 
@@ -99,40 +95,40 @@ public class EmployeeBook {
     }
 
     public void findEmpWithMinSalaryInDepartment(int department) {
-        int minSalary = employees[department].getSalary();
-        Employee employeeWithMinSalary = employees[department];
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment() == department) {
-                if (employee.getSalary() < minSalary) {
-                    minSalary = employee.getSalary();
-                    employeeWithMinSalary = employee;
+        if (employees[0] != null) {
+            double minSalary = employees[0].getSalary();
+            Employee employeeWithMinSalary =  employees[0];
+            for (Employee employee : employees) {
+                if (employee != null && employee.getDepartment() == department && employee.getSalary() < minSalary) {
+                        minSalary = employee.getSalary();
+                        employeeWithMinSalary = employee;
                 }
             }
-        }
-        if (employeeWithMinSalary != null) {
-            System.out.println("Сотрудник отдела № " + department + " с мин зп: "
-                    + employeeWithMinSalary.getFullName());
+            if (employeeWithMinSalary != null) {
+                System.out.println("Сотрудник отдела № " + department + " с мин зп: "
+                        + employeeWithMinSalary.getFullName());
+            }
         }
     }
 
     public void findEmpWithMaxSalaryInDepartment(int department) {
         int maxSalary = -1;
-        Employee employeeWithMaxSalary = null;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment() == department) {
-                if (employee.getSalary() > maxSalary) {
-                    maxSalary = employee.getSalary();
-                    employeeWithMaxSalary = employee;
+        if (employees != null) {
+            Employee employeeWithMaxSalary = null;
+            for (Employee employee : employees) {
+                if (employee != null && employee.getDepartment() == department && employee.getSalary() > maxSalary) {
+                        maxSalary = employee.getSalary();
+                        employeeWithMaxSalary = employee;
                 }
             }
-        }
-        if (employeeWithMaxSalary != null) {
-            System.out.println("Сотрудник отдела № " + department + " с мах зп: " + employeeWithMaxSalary.getFullName());
+            if (employeeWithMaxSalary != null) {
+                System.out.println("Сотрудник отдела № " + department + " с мах зп: " + employeeWithMaxSalary.getFullName());
+            }
         }
     }
 
     public void sumSalaryOfDepartment(int department) {
-        int sum = 0;
+        double sum = 0;
         for (Employee element : employees) {
             if (element != null && element.getDepartment() == department) {
                 sum += element.getSalary();
@@ -151,7 +147,7 @@ public class EmployeeBook {
     }
 
     public void meanSalaryOfDepartment(int department) {
-        int sum = 0;
+        double sum = 0;
         int count = 0;
         for (Employee element : employees) {
             if (element != null && element.getDepartment() == department) {
@@ -159,11 +155,11 @@ public class EmployeeBook {
                 count++;
             }
         }
-        float mean = sum / count;
+        double mean = sum / count;
         System.out.println("Средняя зарплата сотрудников отдела № " + department + " составляет: " + mean + " рублей.");
     }
 
-    public void findEmpSalary1(int salary) {
+    public void findEmpSalary1(double salary) {
         System.out.println("Сотрудники с зп меньше " + salary + " рублей:");
         for (Employee employee : employees) {
             if (employee != null && employee.getSalary() < salary) {
@@ -172,7 +168,7 @@ public class EmployeeBook {
         }
     }
 
-    public void findEmpSalary2(int salary) {
+    public void findEmpSalary2(double salary) {
         System.out.println("Сотрудники с зп больше " + salary + " рублей:");
         for (Employee employee : employees) {
             if (employee != null && employee.getSalary() > salary) {
@@ -189,4 +185,55 @@ public class EmployeeBook {
             }
         }
     }
+    public boolean deleteEmployee (int id) {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getId() == id) {
+                employees[i] = null;
+                return true;
+            }
+        }
+        return false;
+    }
+    public Employee searchEmployeeByFullName (String fullName){
+        Employee searchResult = null;
+        for(Employee employee:employees){
+            if (employee != null && employee.getFullName().equals(fullName)){
+                searchResult = employee;
+                System.out.println("Сотрудник найден. ID: " + employee.getId());
+            }
+        }
+        return searchResult;
+    }
+    public Employee changeEmployeeSalary(int id, double salary){
+        Employee searchResult = null;
+        for(Employee employee:employees){
+            if (employee != null && employee.getId() == id){
+                searchResult = employee;
+                employee.setSalary(salary);
+            }
+        }
+        return searchResult;
+    }
+
+    public Employee changeEmployeeDepartment(int id, int department){
+        Employee searchResult = null;
+        for(Employee employee:employees){
+            if (employee != null && employee.getId() == id){
+                searchResult = employee;
+                employee.setDepartment(department);
+
+            }
+        }
+        return searchResult;
+    }
+
+    public void printAllEmployeesOfDepartment (int department) {
+        System.out.println("Отдел № " + department);
+        for(Employee employee: employees){
+            if (employee != null && employee.getDepartment() == department){
+                System.out.println(employee.getFullName());
+            }
+        }
+    }
+
 }

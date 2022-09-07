@@ -11,10 +11,6 @@ public class Employee {
         this.id = countId++;
     }
 
-    public static int getCountId() {
-        return countId;
-    }
-
         public int getId() {
         return id;
     }
