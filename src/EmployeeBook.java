@@ -235,5 +235,13 @@ public class EmployeeBook {
             }
         }
     }
+    public void printDep(){
+        for (int i = 0; i < employees.length; i++) {
+            if (i >=1 && i < 6){
+                printAllEmployeesOfDepartment(i);
+            }
+
+        }
+    }
 
 }

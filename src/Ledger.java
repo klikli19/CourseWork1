@@ -21,6 +21,7 @@ public class Ledger {
         book1.printAllEmployeesOfDepartment(1);
         book1.findEmpWithMinSalaryInDepartment(4);
         book1.meanSalary();
+        book1.printDep();
 
 
 
