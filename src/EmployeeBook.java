@@ -1,6 +1,4 @@
-import java.util.Arrays;
-
-public class EmployeeBook<employees> {
+public class EmployeeBook {
     private final Employee[] employees;
 
     public EmployeeBook(int size) {
@@ -66,13 +64,15 @@ public class EmployeeBook<employees> {
     }
 
     public void meanSalary() {
-        double sum = 0;
+        float sum = 0;
+        int count = 0;
         for (Employee element : employees) {
             if (element != null) {
                 sum += element.getSalary();
+                count++;
             }
         }
-        double mean = sum / employees.length;
+        float mean = sum / count;
         System.out.println("Средняя зарплата сотрудников: " + mean + " рублей.");
     }
 
@@ -95,7 +95,7 @@ public class EmployeeBook<employees> {
     }
 
     public void findEmpWithMinSalaryInDepartment(int department) {
-        if (employees[0] != null) {
+        if (employees.length > 0) {
             double minSalary = employees[0].getSalary();
             Employee employeeWithMinSalary =  employees[0];
             for (Employee employee : employees) {
@@ -113,7 +113,7 @@ public class EmployeeBook<employees> {
 
     public void findEmpWithMaxSalaryInDepartment(int department) {
         int maxSalary = -1;
-        if (employees != null) {
+        if (employees.length > 0) {
             Employee employeeWithMaxSalary = null;
             for (Employee employee : employees) {
                 if (employee != null && employee.getDepartment() == department && employee.getSalary() > maxSalary) {
@@ -210,18 +210,18 @@ public class EmployeeBook<employees> {
             if (employee != null && employee.getId() == id){
                 searchResult = employee;
                 employee.setSalary(salary);
+                break;
             }
         }
         return searchResult;
     }
-
     public Employee changeEmployeeDepartment(int id, int department){
         Employee searchResult = null;
         for(Employee employee:employees){
             if (employee != null && employee.getId() == id){
                 searchResult = employee;
                 employee.setDepartment(department);
-
+                break;
             }
         }
         return searchResult;
@@ -229,8 +229,8 @@ public class EmployeeBook<employees> {
 
     public void printAllEmployeesOfDepartment (int department) {
         System.out.println("Отдел № " + department);
-        for(Employee employee: employees){
-            if (employee != null && employee.getDepartment() == department){
+        for(Employee employee: employees) {
+            if (employee != null && employee.getDepartment() == department) {
                 System.out.println(employee.getFullName());
             }
         }

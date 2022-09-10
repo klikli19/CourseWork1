@@ -19,7 +19,8 @@ public class Ledger {
         book1.changeEmployeeSalary(9, 140400);
         book1.searchMaxSalary();
         book1.printAllEmployeesOfDepartment(1);
-
+        book1.findEmpWithMinSalaryInDepartment(4);
+        book1.meanSalary();
 
 
 
